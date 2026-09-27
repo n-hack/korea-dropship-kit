@@ -1,0 +1,6 @@
+config/
+data/
+*.jsonl
+*.csv
+__pycache__/
+.DS_Store
