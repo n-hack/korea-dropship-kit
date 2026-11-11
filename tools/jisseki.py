@@ -40,7 +40,8 @@ def month(ym, path=LEDGER):
 
 def selftest():
     import tempfile, os
-    p = tempfile.mktemp()
+    fd, p = tempfile.mkstemp()
+    os.close(fd)
     bad = 0
     r = add({"order": "C1", "date": "2026-10-03", "krw": 303420, "nyukin_jpy": 31500, "shiire_jpy": 22330,
              "haniro_jpy": 1120, "mikomi_jpy": 9074}, p)

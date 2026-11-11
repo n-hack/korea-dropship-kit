@@ -155,8 +155,12 @@ class FakeClient:
 def selftest():
     import tempfile
     cl = FakeClient()
-    st = {"ledger": [], "today_total": 0, "marked": {"W1": True}, "shoko_path": tempfile.mktemp(),
-          "haniro_csv": tempfile.mktemp(suffix=".csv")}
+    fd1, shoko_p = tempfile.mkstemp()
+    os.close(fd1)
+    fd2, haniro_p = tempfile.mkstemp(suffix=".csv")
+    os.close(fd2)
+    st = {"ledger": [], "today_total": 0, "marked": {"W1": True}, "shoko_path": shoko_p,
+          "haniro_csv": haniro_p}
     rep = cycle(cl, st)
     bad = 0
     checks = [

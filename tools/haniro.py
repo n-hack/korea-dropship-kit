@@ -58,7 +58,9 @@ def selftest():
     ok = len(rows) == 1 and ng == [("2-A2", ["zip"])]
     bad += not ok
     print("✅" if ok else "🔴", "郵便番号の欠けた注文は表に入れず、どの欄が欠けたかを返す", ng)
-    p = write(rows, tempfile.mktemp(suffix=".csv"))
+    fd, p = tempfile.mkstemp(suffix=".csv")
+    os.close(fd)
+    p = write(rows, p)
     txt = open(p, encoding="utf-8-sig").read()
     ok = "1-A1" in txt and "P1" in txt and txt.splitlines()[0].startswith("receiver")
     bad += not ok

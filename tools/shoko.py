@@ -56,7 +56,8 @@ def find(coupang_order, path=LEDGER):
 
 def selftest():
     import tempfile, os
-    p = tempfile.mktemp()
+    fd, p = tempfile.mkstemp()
+    os.close(fd)
     good = {"kounyusaki": "Amazon.co.jp", "date": "2026-10-01", "asin": "B0088B5FTE", "title": "ウタマロキッチン 詰替",
             "qty": 1, "jpy": 253, "amazon_order": "250-0000000-0000000", "coupang_order": "C1"}
     bad = 0

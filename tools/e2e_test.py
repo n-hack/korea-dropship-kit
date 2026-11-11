@@ -52,7 +52,8 @@ bad += go
 print("✅" if not go else "🔴", "同じ注文は2回発注しない：", why)
 b = abiz.build(plan["orderId"], plan["asin"], plan["qty"])
 
-p = tempfile.mktemp()
+fd, p = tempfile.mkstemp()
+os.close(fd)
 shoko.add({"kounyusaki": "Amazon.co.jp", "date": "2026-10-01", "asin": "A1", "title": cands[0]["title"], "qty": 1,
            "jpy": 6000, "amazon_order": "250-1", "coupang_order": "77"}, p)
 bad += len(shoko.find("77", p)) != 1
